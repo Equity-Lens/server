@@ -19,7 +19,12 @@ const PORT = process.env.PORT || 3001;
 
 const io = new SocketIOServer(httpServer, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: [
+        'http://localhost:5173',
+        'http://localhost:3000',
+        'https://client-seven-cyan.vercel.app',
+        process.env.CLIENT_URL || '',
+    ].filter(Boolean),
     methods: ['GET', 'POST'],
     credentials: true,
   },
